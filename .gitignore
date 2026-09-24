@@ -1,0 +1,88 @@
+# Compiled binaries and object files
+*.exe
+*.out
+*.app
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.lib
+*.a
+*.la
+*.lai
+
+# Known project binaries
+db
+db.exe
+a.out
+
+# Debugging and symbols
+*.pdb
+*.idb
+*.ilk
+*.d
+*.dSYM/
+*.suo
+
+# Build and distribution directories
+build/
+bin/
+dist/
+out/
+target/
+x64/
+x86/
+Debug/
+Release/
+
+# CMake artifacts
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+Makefile
+cmake-build-*/
+
+# Visual Studio / MSVC artifacts
+.vs/
+*.user
+*.userprefs
+*.sln.docstates
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Operating System files
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Logs & temp files
+*.log
+*.tmp
+*.bak
+*.cache
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
