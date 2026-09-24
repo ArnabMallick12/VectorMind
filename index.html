@@ -3,55 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VectorMind — Neural Vector Database &amp; RAG Platform</title>
+<title>VectorMind — High-Performance Neural Vector Database &amp; RAG Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-primary: #08090f;
-  --bg-secondary: #0d0f1a;
-  --bg-card: rgba(16, 19, 34, 0.85);
-  --bg-card-hover: rgba(22, 26, 46, 0.95);
-  --bg-input: #090b14;
-  --border-subtle: rgba(255, 255, 255, 0.07);
-  --border-focus: rgba(99, 102, 241, 0.6);
-  --border-glow: rgba(99, 102, 241, 0.3);
+  /* ── Deep Cyber/Aurora Color Palette ── */
+  --bg-core: #04050a;
+  --bg-surface: rgba(10, 12, 22, 0.75);
+  --bg-surface-elevated: rgba(16, 20, 38, 0.85);
+  --bg-glass-card: rgba(18, 22, 42, 0.6);
+  --bg-glass-card-hover: rgba(28, 34, 62, 0.8);
+  --bg-input: rgba(6, 8, 16, 0.85);
 
-  /* Primary Accent & Semantic Clusters */
-  --accent: #6366f1;
-  --accent-light: #818cf8;
-  --accent-glow: rgba(99, 102, 241, 0.4);
-  --cs: #06b6d4;
-  --cs-glow: rgba(6, 182, 212, 0.4);
-  --math: #a855f7;
-  --math-glow: rgba(168, 85, 247, 0.4);
-  --food: #f59e0b;
-  --food-glow: rgba(245, 158, 11, 0.4);
-  --sports: #10b981;
-  --sports-glow: rgba(16, 185, 129, 0.4);
-  --doc: #38bdf8;
-  --doc-glow: rgba(56, 189, 248, 0.4);
+  /* ── Borders & Glassmorphism ── */
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass-bright: rgba(255, 255, 255, 0.16);
+  --border-neon-indigo: rgba(99, 102, 241, 0.5);
+  --border-neon-cyan: rgba(6, 182, 212, 0.5);
 
-  /* Neutrals */
-  --text-primary: #f8fafc;
+  /* ── Vibrant Neon Accents ── */
+  --neon-indigo: #6366f1;
+  --neon-violet: #8b5cf6;
+  --neon-pink: #ec4899;
+  --neon-cyan: #06b6d4;
+  --neon-teal: #14b8a6;
+  --neon-emerald: #10b981;
+  --neon-amber: #f59e0b;
+  --neon-coral: #ff6b6b;
+
+  /* ── Semantic Category Colors ── */
+  --cat-cs: #00f0ff;
+  --cat-cs-glow: rgba(0, 240, 255, 0.45);
+  --cat-math: #c084fc;
+  --cat-math-glow: rgba(192, 132, 252, 0.45);
+  --cat-food: #fbbf24;
+  --cat-food-glow: rgba(251, 191, 36, 0.45);
+  --cat-sports: #34d399;
+  --cat-sports-glow: rgba(52, 211, 153, 0.45);
+  --cat-doc: #38bdf8;
+  --cat-doc-glow: rgba(56, 189, 248, 0.45);
+
+  /* ── Typography & Gradients ── */
+  --text-white: #ffffff;
+  --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  --danger: #f43f5e;
-  --danger-bg: rgba(244, 63, 94, 0.12);
-  --success: #10b981;
-  --success-bg: rgba(16, 185, 129, 0.12);
+  --grad-hero: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+  --grad-btn: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --grad-btn-green: linear-gradient(135deg, #10b981, #06b6d4);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: var(--bg-primary);
-  background-image: 
-    radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.06) 0%, transparent 40%);
+  background: var(--bg-core);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent 70%),
+    radial-gradient(circle at 10% 90%, rgba(139, 92, 246, 0.1), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.1), transparent 40%);
   color: var(--text-primary);
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
   height: 100vh;
   overflow: hidden;
   display: flex;
@@ -59,15 +72,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── HEADER ── */
+/* ── TOP NAV BAR ── */
 header {
-  background: rgba(13, 15, 26, 0.85);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(8, 10, 18, 0.7);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--border-glass);
   padding: 10px 24px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   flex-shrink: 0;
   z-index: 100;
 }
@@ -79,100 +92,109 @@ header {
   text-decoration: none;
 }
 
-.brand-icon {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, #6366f1, #06b6d4);
-  border-radius: 9px;
+.brand-gem {
+  width: 34px;
+  height: 34px;
+  background: var(--grad-hero);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 16px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.4);
+  position: relative;
 }
 
-.brand-icon svg { width: 18px; height: 18px; fill: white; }
+.brand-gem svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
 
-.brand-title {
+.brand-text {
   display: flex;
   flex-direction: column;
 }
 
-.brand-title h1 {
-  font-size: 17px;
+.brand-title {
+  font-size: 19px;
   font-weight: 800;
-  letter-spacing: -0.5px;
-  background: linear-gradient(90deg, #ffffff, #c7d2fe);
+  letter-spacing: -0.6px;
+  background: linear-gradient(135deg, #ffffff 30%, #c7d2fe 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.1;
 }
 
-.brand-title span {
+.brand-tag {
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 1.2px;
-  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
 }
 
-.badge-group {
+.system-badges {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-left: 10px;
+  margin-left: 8px;
 }
 
-.badge {
+.pill-badge {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   font-weight: 600;
-  padding: 3px 9px;
-  border-radius: 6px;
+  padding: 4px 10px;
+  border-radius: 8px;
   letter-spacing: 0.5px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-glass);
   background: rgba(255, 255, 255, 0.03);
   color: var(--text-secondary);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
-.badge.hl {
+.pill-badge.active-hnsw {
   border-color: rgba(99, 102, 241, 0.4);
-  color: #a5b4fc;
-  background: rgba(99, 102, 241, 0.12);
+  color: #c7d2fe;
+  background: rgba(99, 102, 241, 0.14);
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.25);
 }
 
-.badge.ok {
-  border-color: rgba(16, 185, 129, 0.3);
+.pill-badge.status-ok {
+  border-color: rgba(16, 185, 129, 0.4);
   color: #6ee7b7;
-  background: var(--success-bg);
+  background: rgba(16, 185, 129, 0.12);
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.2);
 }
 
-.badge.err {
-  border-color: rgba(244, 63, 94, 0.3);
+.pill-badge.status-err {
+  border-color: rgba(244, 63, 94, 0.4);
   color: #fda4af;
-  background: var(--danger-bg);
+  background: rgba(244, 63, 94, 0.12);
 }
 
-.badge .pulse-dot {
+.live-beacon {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: currentColor;
   box-shadow: 0 0 8px currentColor;
-  animation: pulse-ring 2s infinite ease-out;
+  animation: beacon-pulse 2s infinite ease-out;
 }
 
-@keyframes pulse-ring {
+@keyframes beacon-pulse {
   0% { transform: scale(0.9); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 1; }
   100% { transform: scale(0.9); opacity: 0.8; }
 }
 
-.header-right {
+.header-meta {
   margin-left: auto;
   display: flex;
   align-items: center;
@@ -184,43 +206,43 @@ header {
   font-size: 11px;
   color: var(--text-secondary);
   background: rgba(255, 255, 255, 0.04);
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid var(--border-subtle);
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-glass);
 }
 
-/* ── LAYOUT ── */
-.layout {
+/* ── WORKSPACE LAYOUT ── */
+.workspace {
   display: flex;
   flex: 1;
   overflow: hidden;
   position: relative;
 }
 
-/* ── LEFT PANEL ── */
-.left-panel {
-  width: 290px;
+/* ── LEFT CONTROLS DOCK ── */
+.left-dock {
+  width: 300px;
   flex-shrink: 0;
-  background: rgba(13, 15, 26, 0.7);
-  backdrop-filter: blur(20px);
-  border-right: 1px solid var(--border-subtle);
+  background: rgba(8, 10, 18, 0.65);
+  backdrop-filter: blur(28px);
+  border-right: 1px solid var(--border-glass);
   overflow-y: auto;
-  padding: 20px 16px;
+  padding: 20px 18px;
   display: flex;
   flex-direction: column;
   gap: 22px;
 }
 
-.panel-sec {
+.dock-card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
-.sec-title {
+.dock-title {
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
   color: var(--text-muted);
   display: flex;
@@ -228,9 +250,12 @@ header {
   justify-content: space-between;
 }
 
-/* Form Controls */
-.input-wrap {
-  position: relative;
+.dock-title svg {
+  color: var(--neon-indigo);
+}
+
+/* Inputs & Form Elements */
+.input-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -239,19 +264,21 @@ header {
 input[type=text], select, textarea {
   width: 100%;
   background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-primary);
-  padding: 10px 12px;
-  border-radius: 8px;
+  border: 1px solid var(--border-glass);
+  color: var(--text-white);
+  padding: 11px 14px;
+  border-radius: 10px;
   font-family: inherit;
   font-size: 12px;
   outline: none;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 input[type=text]:focus, select:focus, textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  border-color: var(--neon-indigo);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2), 0 0 16px rgba(99, 102, 241, 0.2);
+  background: rgba(10, 14, 28, 0.95);
 }
 
 input[type=text]::placeholder, textarea::placeholder {
@@ -260,221 +287,222 @@ input[type=text]::placeholder, textarea::placeholder {
 
 textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 105px;
   line-height: 1.6;
 }
 
 select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 32px;
+  background-position: right 14px center;
+  padding-right: 36px;
 }
 
 select option {
-  background: #111322;
-  color: var(--text-primary);
+  background: #0f1322;
+  color: var(--text-white);
 }
 
-/* Quick Suggestion Chips */
-.quick-tags {
+/* Concept Tag Chips */
+.tag-rack {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 5px;
   margin-top: 2px;
 }
 
-.tag-chip {
-  font-size: 9px;
-  padding: 3px 7px;
-  border-radius: 5px;
+.tag-btn {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 4px 9px;
+  border-radius: 6px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-glass);
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s ease;
 }
 
-.tag-chip:hover {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: rgba(99, 102, 241, 0.4);
-  color: #c7d2fe;
+.tag-btn:hover {
+  background: rgba(99, 102, 241, 0.18);
+  border-color: rgba(99, 102, 241, 0.45);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 /* Buttons */
 button {
   width: 100%;
-  padding: 10px 14px;
+  padding: 11px 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   font-family: inherit;
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
-.btn-p {
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+.btn-primary {
+  background: var(--grad-btn);
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.4);
+  position: relative;
+  overflow: hidden;
 }
 
-.btn-p:hover {
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.55);
-  transform: translateY(-1px);
+.btn-primary:hover {
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.65);
+  transform: translateY(-1.5px);
 }
 
-.btn-p:disabled {
-  opacity: 0.55;
-  transform: none;
-  cursor: not-allowed;
-  box-shadow: none;
-}
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
 
-.btn-s {
+.btn-secondary {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-glass);
   color: var(--text-primary);
 }
 
-.btn-s:hover {
+.btn-secondary:hover {
   background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-.btn-g {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(6, 182, 212, 0.18));
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.35);
-}
-
-.btn-g:hover {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.28), rgba(6, 182, 212, 0.28));
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+  border-color: var(--border-glass-bright);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
-.btn-g:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
+.btn-success {
+  background: var(--grad-btn-green);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
 }
 
-/* Algorithm Switcher */
-.algo-grid {
-  display: flex;
+.btn-success:hover {
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.55);
+  transform: translateY(-1.5px);
+}
+
+.btn-success:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* Algorithm Switcher Tiles */
+.algo-deck {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 6px;
 }
 
-.algo-card {
-  flex: 1;
-  padding: 8px 6px;
-  border-radius: 7px;
-  border: 1px solid var(--border-subtle);
+.algo-tile {
+  padding: 9px 6px;
+  border-radius: 9px;
+  border: 1px solid var(--border-glass);
   background: var(--bg-input);
   color: var(--text-secondary);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   text-align: center;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
-.algo-card .algo-desc {
+.algo-tile .tile-sub {
   font-size: 8px;
+  font-family: 'JetBrains Mono', monospace;
   color: var(--text-muted);
-  font-weight: 400;
+  font-weight: 500;
 }
 
-.algo-card:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.03);
+.algo-tile:hover {
+  border-color: var(--border-glass-bright);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.algo-card.on {
-  border-color: var(--accent);
-  color: #c7d2fe;
-  background: rgba(99, 102, 241, 0.14);
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+.algo-tile.selected {
+  border-color: var(--neon-indigo);
+  color: #ffffff;
+  background: rgba(99, 102, 241, 0.16);
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.3), inset 0 0 12px rgba(99, 102, 241, 0.15);
 }
 
-.algo-card.on .algo-desc {
+.algo-tile.selected .tile-sub {
   color: #a5b4fc;
 }
 
-/* Slider */
-.slider-container {
+/* Custom Top-K Slider */
+.slider-hub {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 input[type=range] {
   flex: 1;
-  accent-color: var(--accent);
-  background: rgba(255, 255, 255, 0.07);
+  accent-color: var(--neon-indigo);
+  background: rgba(255, 255, 255, 0.08);
   height: 6px;
   border-radius: 3px;
   outline: none;
   cursor: pointer;
 }
 
-.slider-val {
+.slider-readout {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent-light);
-  min-width: 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  min-width: 22px;
   text-align: right;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
 }
 
-/* Category Legend */
-.legend-grid {
+/* Cluster Legend */
+.legend-rack {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
-.leg-item {
+.legend-pill {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 11px;
+  font-weight: 500;
   color: var(--text-secondary);
-  padding: 4px 6px;
-  border-radius: 6px;
-  transition: background 0.15s;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.2s;
 }
 
-.leg-item:hover {
-  background: rgba(255, 255, 255, 0.03);
+.legend-pill:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
 }
 
-.dot {
+.cluster-dot {
   width: 9px;
   height: 9px;
   border-radius: 50%;
   flex-shrink: 0;
-  position: relative;
 }
 
-/* ── CENTER: SCATTER PLOT CANVAS ── */
-.center-panel {
+/* ── CENTER: HIGH-TECH SCATTER PLOT ── */
+.center-viewport {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at center, #0c0e18 0%, #06070c 100%);
+  background: radial-gradient(circle at center, #090c19 0%, #030408 100%);
   display: flex;
   flex-direction: column;
 }
@@ -485,650 +513,659 @@ input[type=range] {
   height: 100%;
 }
 
-.canvas-overlay-top {
+.viewport-banner {
   position: absolute;
-  top: 16px;
-  left: 20px;
+  top: 18px;
+  left: 22px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   pointer-events: none;
 }
 
-.canvas-title {
-  font-size: 12px;
+.viewport-badge {
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.8px;
   color: var(--text-secondary);
-  background: rgba(13, 15, 26, 0.7);
-  backdrop-filter: blur(8px);
-  padding: 6px 12px;
-  border-radius: 7px;
-  border: 1px solid var(--border-subtle);
+  background: rgba(10, 12, 22, 0.75);
+  backdrop-filter: blur(12px);
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-glass);
 }
 
-.canvas-controls {
+.viewport-tools {
   position: absolute;
-  top: 16px;
-  right: 20px;
+  top: 18px;
+  right: 22px;
   display: flex;
   gap: 8px;
 }
 
-.canvas-btn {
-  background: rgba(13, 15, 26, 0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--border-subtle);
+.tool-btn {
+  background: rgba(10, 12, 22, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
   color: var(--text-secondary);
   font-size: 11px;
-  padding: 6px 10px;
-  border-radius: 6px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
   width: auto;
 }
 
-.canvas-btn:hover {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: var(--accent);
-  color: #fff;
+.tool-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--neon-indigo);
+  color: #ffffff;
 }
 
-/* ── RIGHT PANEL: TABS & CONTENT ── */
-.right-panel {
-  width: 380px;
+/* ── RIGHT DOCK: TABS & RESULTS ── */
+.right-dock {
+  width: 390px;
   flex-shrink: 0;
-  background: rgba(13, 15, 26, 0.8);
-  backdrop-filter: blur(20px);
-  border-left: 1px solid var(--border-subtle);
+  background: rgba(8, 10, 18, 0.75);
+  backdrop-filter: blur(28px);
+  border-left: 1px solid var(--border-glass);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-/* Tabs */
-.tabs-nav {
+/* Tab Header */
+.tab-strip {
   display: flex;
-  border-bottom: 1px solid var(--border-subtle);
-  background: rgba(9, 11, 20, 0.6);
+  border-bottom: 1px solid var(--border-glass);
+  background: rgba(6, 8, 16, 0.7);
   flex-shrink: 0;
 }
 
-.tab-btn {
+.tab-trigger {
   flex: 1;
-  padding: 13px 8px;
+  padding: 14px 10px;
   text-align: center;
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
+  font-weight: 800;
+  letter-spacing: 1px;
   cursor: pointer;
   color: var(--text-muted);
   border-bottom: 2px solid transparent;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
 }
 
-.tab-btn:hover {
+.tab-trigger:hover {
   color: var(--text-secondary);
 }
 
-.tab-btn.on {
-  color: #c7d2fe;
-  border-bottom-color: var(--accent);
-  background: rgba(99, 102, 241, 0.05);
+.tab-trigger.active {
+  color: #ffffff;
+  border-bottom-color: var(--neon-indigo);
+  background: rgba(99, 102, 241, 0.08);
 }
 
-.tab-pane {
+.tab-chamber {
   display: none;
   flex: 1;
   overflow-y: auto;
-  padding: 20px 18px;
+  padding: 22px 20px;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
-.tab-pane.on {
+.tab-chamber.active {
   display: flex;
 }
 
-/* Latency Box */
-.latency-hero {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(6, 182, 212, 0.05));
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 12px;
-  padding: 14px 16px;
+/* Latency Display Box */
+.speedometer-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(6, 182, 212, 0.08));
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 14px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.speedometer-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.8), transparent);
+}
+
+.lat-digits {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  letter-spacing: -1px;
+  text-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.lat-meta {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Results Cards */
+.results-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.match-card {
+  background: var(--bg-glass-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 11px;
+  padding: 12px 14px;
+  animation: cardSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
   position: relative;
   overflow: hidden;
 }
 
-.latency-hero::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(9deg, transparent, rgba(99, 102, 241, 0.5), transparent);
-}
-
-.lat-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--cs);
-  letter-spacing: -1px;
-  text-shadow: 0 0 20px var(--cs-glow);
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.lat-sub {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 4px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Results List */
-.results-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.rcard {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 9px;
-  padding: 12px;
-  animation: cardFade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  transition: all 0.2s;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-@keyframes cardFade {
-  from { opacity: 0; transform: translateY(6px); }
+@keyframes cardSlideUp {
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.rcard:hover {
-  background: var(--bg-card-hover);
-  border-color: rgba(99, 102, 241, 0.3);
-  transform: translateY(-1px);
+.match-card:hover {
+  background: var(--bg-glass-card-hover);
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-.rcard-top {
+.card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.rrank {
+.match-rank {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 700;
   letter-spacing: 1px;
   color: var(--text-muted);
 }
 
-.rmeta {
-  font-size: 12px;
-  font-weight: 500;
+.match-label {
+  font-size: 13px;
+  font-weight: 600;
   line-height: 1.5;
-  color: var(--text-primary);
+  color: var(--text-white);
 }
 
-.rfoot {
+.card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 4px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  margin-top: 2px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.rcat {
+.match-cat-pill {
   font-size: 9px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 5px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
-.rdist {
+.match-distance {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text-secondary);
 }
 
-.del-btn {
+.trash-btn {
   background: rgba(244, 63, 94, 0.1);
   color: #fda4af;
   border: 1px solid rgba(244, 63, 94, 0.25);
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 10px;
-  padding: 2px 6px;
-  font-family: inherit;
-  transition: all 0.15s;
+  font-size: 11px;
+  padding: 3px 7px;
+  transition: all 0.2s;
   width: auto;
 }
 
-.del-btn:hover {
-  background: rgba(244, 63, 94, 0.25);
-  border-color: rgba(244, 63, 94, 0.5);
-  color: #fff;
+.trash-btn:hover {
+  background: rgba(244, 63, 94, 0.3);
+  color: #ffffff;
+  border-color: rgba(244, 63, 94, 0.6);
 }
 
-/* Benchmark Bars */
-.bench-box {
+/* Benchmark Bar Container */
+.bench-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  background: rgba(9, 11, 20, 0.5);
-  border: 1px solid var(--border-subtle);
-  border-radius: 9px;
-  padding: 12px;
+  gap: 12px;
+  background: rgba(6, 8, 16, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 14px;
 }
 
-.bench-row {
+.bench-entry {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
-.bench-label {
+.bench-header {
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
 }
 
-.bench-track {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
+.bench-runway {
+  height: 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
   overflow: hidden;
 }
 
-.bench-fill {
+.bench-bar {
   height: 100%;
-  border-radius: 3px;
-  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* HNSW Graph Layers */
-.layers-box {
+/* HNSW Layer Stack */
+.hnsw-stack {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
-.lrow {
+.hnsw-level {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 10px;
   font-family: 'JetBrains Mono', monospace;
 }
 
-.lnum {
-  width: 22px;
+.level-id {
+  width: 24px;
   text-align: right;
-  color: var(--accent-light);
+  color: var(--neon-violet);
   font-weight: 700;
 }
 
-.ltrack {
+.level-channel {
   flex: 1;
   height: 6px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 3px;
   overflow: hidden;
 }
 
-.lfill {
+.level-meter {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--cs));
+  background: linear-gradient(90deg, var(--neon-indigo), var(--neon-cyan));
   border-radius: 3px;
   transition: width 0.4s ease;
 }
 
-.lcount {
-  width: 85px;
+.level-count {
+  width: 90px;
   text-align: right;
   color: var(--text-muted);
 }
 
-/* Ollama Status Card */
+/* Ollama Integration Banner */
 .ollama-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  padding: 14px;
+  background: var(--bg-glass-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 16px;
   font-size: 11px;
   line-height: 1.6;
 }
 
-.ollama-card.ok {
-  border-color: rgba(16, 185, 129, 0.3);
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), transparent);
+.ollama-card.online {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), transparent);
 }
 
-.ollama-card.err {
-  border-color: rgba(244, 63, 94, 0.3);
-  background: linear-gradient(135deg, rgba(244, 63, 94, 0.06), transparent);
+.ollama-card.offline {
+  border-color: rgba(244, 63, 94, 0.35);
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.08), transparent);
 }
 
-/* Document Cards */
-.doc-list {
+/* Ingested Document Cards */
+.doc-rack {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
 }
 
-.dcard {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 9px;
-  padding: 12px;
-  animation: cardFade 0.25s ease;
+.doc-tile {
+  background: var(--bg-glass-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 11px;
+  padding: 13px 15px;
+  animation: cardSlideUp 0.25s ease;
   transition: all 0.2s;
 }
 
-.dcard:hover {
-  background: var(--bg-card-hover);
-  border-color: rgba(16, 185, 129, 0.3);
+.doc-tile:hover {
+  background: var(--bg-glass-card-hover);
+  border-color: rgba(16, 185, 129, 0.4);
 }
 
-.dcard-title {
+.doc-title {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 4px;
   color: #6ee7b7;
 }
 
-.dcard-preview {
+.doc-snippet {
   font-size: 11px;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 8px;
 }
 
-.dcard-foot {
+.doc-meta-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 7px;
 }
 
-.dcard-words {
+.doc-stat {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   color: var(--text-muted);
 }
 
-/* Chat & RAG */
-.chat-thread {
+/* RAG Chat Thread */
+.rag-timeline {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
-.chat-bubble-q {
-  background: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.25);
-  border-radius: 10px;
-  border-bottom-right-radius: 2px;
-  padding: 12px 14px;
-  font-size: 12px;
+.user-query-bubble {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.16), rgba(139, 92, 246, 0.12));
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 12px;
+  border-bottom-right-radius: 3px;
+  padding: 12px 16px;
+  font-size: 13px;
   line-height: 1.5;
   align-self: flex-end;
-  max-width: 90%;
-  color: #e0e7ff;
+  max-width: 92%;
+  color: #e2e8f0;
 }
 
-.chat-bubble-a {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  border-bottom-left-radius: 2px;
-  padding: 14px;
+.ai-response-box {
+  background: var(--bg-glass-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  border-bottom-left-radius: 3px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
-.chat-author {
-  font-size: 10px;
-  font-weight: 700;
+.ai-badge {
+  font-size: 11px;
+  font-weight: 800;
   letter-spacing: 1px;
   color: #34d399;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
 }
 
-.chat-text {
-  font-size: 12px;
-  line-height: 1.7;
+.ai-prose {
+  font-size: 13px;
+  line-height: 1.75;
   white-space: pre-wrap;
   color: var(--text-primary);
 }
 
-.chat-ctx-box {
+.retrieval-box {
   margin-top: 4px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
 }
 
-.chat-ctx-header {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
+.retrieval-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
   color: var(--text-muted);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   text-transform: uppercase;
 }
 
-.ctx-chip {
+.source-pill {
   display: inline-block;
   font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
-  padding: 3px 8px;
+  padding: 4px 9px;
   border-radius: 6px;
   margin: 2px;
-  background: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.25);
+  background: rgba(99, 102, 241, 0.14);
+  border: 1px solid rgba(99, 102, 241, 0.3);
   color: #c7d2fe;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
 }
 
-.ctx-chip:hover {
-  background: rgba(99, 102, 241, 0.25);
+.source-pill:hover {
+  background: rgba(99, 102, 241, 0.28);
+  color: #ffffff;
 }
 
-.ctx-expand {
+.source-details {
   display: none;
   font-size: 11px;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-top: 6px;
-  padding: 10px;
-  background: #080a14;
-  border-radius: 6px;
-  border: 1px solid var(--border-subtle);
+  margin-top: 8px;
+  padding: 12px;
+  background: rgba(6, 8, 16, 0.9);
+  border-radius: 8px;
+  border: 1px solid var(--border-glass);
 }
 
-.thinking-loader {
+.pulse-spinner {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-secondary);
 }
 
-.spinner {
+.spin-ring {
   width: 16px;
   height: 16px;
-  border: 2px solid var(--border-subtle);
-  border-top-color: var(--accent);
+  border: 2px solid var(--border-glass);
+  border-top-color: var(--neon-cyan);
   border-radius: 50%;
-  animation: spin 0.7s linear infinite;
+  animation: spinRing 0.7s linear infinite;
   flex-shrink: 0;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spinRing { to { transform: rotate(360deg); } }
 
-.typing-cursor::after {
+.cursor-trail::after {
   content: '▋';
-  animation: cursorBlink 1s step-end infinite;
-  color: var(--accent);
+  animation: blinkCursor 1s step-end infinite;
+  color: var(--neon-cyan);
 }
 
-@keyframes cursorBlink { 50% { opacity: 0; } }
+@keyframes blinkCursor { 50% { opacity: 0; } }
 
-/* Floating Tooltip */
+/* Floating HUD Tooltip */
 #tip {
   position: fixed;
   display: none;
-  background: rgba(16, 19, 34, 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 8px 12px;
+  background: rgba(12, 16, 32, 0.94);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
   font-size: 11px;
   pointer-events: none;
-  max-width: 240px;
+  max-width: 250px;
   z-index: 300;
   line-height: 1.5;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
 }
 
-/* Scrollbars */
+/* Custom Scrollbars */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
 </style>
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
+<!-- ══ TOP NAV BAR ══ -->
 <header>
   <a href="#" class="brand">
-    <div class="brand-icon">
+    <div class="brand-gem">
       <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
     </div>
-    <div class="brand-title">
-      <h1>VectorMind</h1>
-      <span>Neural Vector Engine &amp; RAG</span>
+    <div class="brand-text">
+      <div class="brand-title">VectorMind</div>
+      <div class="brand-tag">Neural Vector Engine</div>
     </div>
   </a>
 
-  <div class="badge-group">
-    <span class="badge hl">
-      <span class="pulse-dot"></span>HNSW v2
+  <div class="system-badges">
+    <span class="pill-badge active-hnsw">
+      <span class="live-beacon"></span>HNSW GRAPH v2
     </span>
-    <span class="badge">KD-TREE</span>
-    <span class="badge">EXHAUSTIVE</span>
-    <span class="badge" id="ollamaBadge">OLLAMA…</span>
+    <span class="pill-badge">KD-TREE</span>
+    <span class="pill-badge">EXHAUSTIVE SEARCH</span>
+    <span class="pill-badge" id="ollamaBadge">OLLAMA…</span>
   </div>
 
-  <div class="header-right">
-    <span id="statsLabel">Connecting…</span>
+  <div class="header-meta">
+    <span id="statsLabel">Engine Initializing…</span>
   </div>
 </header>
 
-<!-- ══ MAIN LAYOUT ══ -->
-<div class="layout">
+<!-- ══ WORKSPACE LAYOUT ══ -->
+<div class="workspace">
 
-  <!-- ── LEFT CONTROL PANEL ── -->
-  <div class="left-panel">
+  <!-- ── LEFT CONTROLS DOCK ── -->
+  <div class="left-dock">
     
-    <!-- Search Box -->
-    <div class="panel-sec">
-      <div class="sec-title">Query Vector</div>
-      <div class="input-wrap">
+    <!-- Search Query -->
+    <div class="dock-card">
+      <div class="dock-title">
+        <span>Target Vector Query</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <div class="input-group">
         <input type="text" id="qInput" placeholder="Try 'binary search tree', 'sushi', 'calculus'…" />
-        <div class="quick-tags">
-          <span class="tag-chip" onclick="setQuery('binary tree')">Tree</span>
-          <span class="tag-chip" onclick="setQuery('linear algebra')">Algebra</span>
-          <span class="tag-chip" onclick="setQuery('japanese ramen')">Ramen</span>
-          <span class="tag-chip" onclick="setQuery('basketball')">Sports</span>
+        <div class="tag-rack">
+          <span class="tag-btn" onclick="applyQueryTag('binary tree')">Tree</span>
+          <span class="tag-btn" onclick="applyQueryTag('linear algebra')">Algebra</span>
+          <span class="tag-btn" onclick="applyQueryTag('japanese ramen')">Ramen</span>
+          <span class="tag-btn" onclick="applyQueryTag('basketball')">Sports</span>
         </div>
-        <button class="btn-p" onclick="runSearch()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          SEARCH VECTORS
+        <button class="btn-primary" onclick="runSearch()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          QUERY NEIGHBORS
         </button>
       </div>
     </div>
 
     <!-- Algorithm Switcher -->
-    <div class="panel-sec">
-      <div class="sec-title">Search Algorithm</div>
-      <div class="algo-grid">
-        <div class="algo-card on" data-algo="hnsw" onclick="setAlgo(this)">
+    <div class="dock-card">
+      <div class="dock-title">Traversal Algorithm</div>
+      <div class="algo-deck">
+        <div class="algo-tile selected" data-algo="hnsw" onclick="selectAlgo(this)">
           <span>HNSW</span>
-          <span class="algo-desc">O(log N)</span>
+          <span class="tile-sub">O(log N)</span>
         </div>
-        <div class="algo-card" data-algo="kdtree" onclick="setAlgo(this)">
+        <div class="algo-tile" data-algo="kdtree" onclick="selectAlgo(this)">
           <span>KD-Tree</span>
-          <span class="algo-desc">Spatial</span>
+          <span class="tile-sub">Spatial</span>
         </div>
-        <div class="algo-card" data-algo="bruteforce" onclick="setAlgo(this)">
+        <div class="algo-tile" data-algo="bruteforce" onclick="selectAlgo(this)">
           <span>Brute</span>
-          <span class="algo-desc">O(N) Exact</span>
+          <span class="tile-sub">O(N) Exact</span>
         </div>
       </div>
     </div>
 
     <!-- Distance Metric -->
-    <div class="panel-sec">
-      <div class="sec-title">Distance Metric</div>
+    <div class="dock-card">
+      <div class="dock-title">Distance Function</div>
       <select id="metric">
-        <option value="cosine">Cosine Similarity</option>
-        <option value="euclidean">Euclidean (L2)</option>
-        <option value="manhattan">Manhattan (L1)</option>
+        <option value="cosine">Cosine Metric (Directional)</option>
+        <option value="euclidean">Euclidean (L2 Geometric)</option>
+        <option value="manhattan">Manhattan (L1 Grid)</option>
       </select>
     </div>
 
     <!-- Top-K Slider -->
-    <div class="panel-sec">
-      <div class="sec-title">
-        <span>Nearest Neighbors (Top-K)</span>
-        <span class="slider-val" id="kLabel">5</span>
+    <div class="dock-card">
+      <div class="dock-title">
+        <span>Nearest Neighbors (K)</span>
+        <span class="slider-readout" id="kLabel">5</span>
       </div>
-      <div class="slider-container">
+      <div class="slider-hub">
         <input type="range" id="kSlider" min="1" max="10" value="5"
                oninput="document.getElementById('kLabel').textContent=this.value">
       </div>
     </div>
 
-    <!-- Semantic Clusters -->
-    <div class="panel-sec">
-      <div class="sec-title">Semantic Clusters</div>
-      <div class="legend-grid">
-        <div class="leg-item"><div class="dot" style="background:var(--cs);box-shadow:0 0 8px var(--cs-glow)"></div>CS &amp; Algorithms</div>
-        <div class="leg-item"><div class="dot" style="background:var(--math);box-shadow:0 0 8px var(--math-glow)"></div>Mathematics</div>
-        <div class="leg-item"><div class="dot" style="background:var(--food);box-shadow:0 0 8px var(--food-glow)"></div>Culinary &amp; Food</div>
-        <div class="leg-item"><div class="dot" style="background:var(--sports);box-shadow:0 0 8px var(--sports-glow)"></div>Athletics &amp; Games</div>
-        <div class="leg-item"><div class="dot" style="background:var(--doc);box-shadow:0 0 8px var(--doc-glow)"></div>Documents (RAG)</div>
+    <!-- Cluster Legend -->
+    <div class="dock-card">
+      <div class="dock-title">Cluster Semantics</div>
+      <div class="legend-rack">
+        <div class="legend-pill"><div class="cluster-dot" style="background:var(--cat-cs);box-shadow:0 0 8px var(--cat-cs-glow)"></div>CS &amp; Algorithms</div>
+        <div class="legend-pill"><div class="cluster-dot" style="background:var(--cat-math);box-shadow:0 0 8px var(--cat-math-glow)"></div>Mathematics</div>
+        <div class="legend-pill"><div class="cluster-dot" style="background:var(--cat-food);box-shadow:0 0 8px var(--cat-food-glow)"></div>Culinary &amp; Food</div>
+        <div class="legend-pill"><div class="cluster-dot" style="background:var(--cat-sports);box-shadow:0 0 8px var(--cat-sports-glow)"></div>Athletics &amp; Games</div>
+        <div class="legend-pill"><div class="cluster-dot" style="background:var(--cat-doc);box-shadow:0 0 8px var(--cat-doc-glow)"></div>Knowledge Docs (RAG)</div>
       </div>
     </div>
 
-    <!-- Insert Demo Vector -->
-    <div class="panel-sec">
-      <div class="sec-title">Insert Vector</div>
-      <div class="input-wrap">
+    <!-- Insert Vector -->
+    <div class="dock-card">
+      <div class="dock-title">Index Custom Node</div>
+      <div class="input-group">
         <input type="text" id="addMeta" placeholder="Label / description…" />
         <select id="addCat">
           <option value="cs">CS &amp; Algorithms</option>
@@ -1136,85 +1173,85 @@ input[type=range] {
           <option value="food">Culinary &amp; Food</option>
           <option value="sports">Athletics &amp; Games</option>
         </select>
-        <button class="btn-s" onclick="addVector()">+ Insert Node</button>
+        <button class="btn-secondary" onclick="addVector()">+ Insert Node</button>
       </div>
     </div>
 
     <!-- Benchmark Action -->
-    <div class="panel-sec">
-      <div class="sec-title">Performance</div>
-      <button class="btn-s" onclick="runBenchmark()">
+    <div class="dock-card">
+      <div class="dock-title">Profiling &amp; Race</div>
+      <button class="btn-secondary" onclick="runBenchmark()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Benchmark All Algorithms
+        Race All 3 Algorithms
       </button>
     </div>
 
   </div>
 
-  <!-- ── CENTER: SCATTER PLOT ── -->
-  <div class="center-panel">
-    <div class="canvas-overlay-top">
-      <div class="canvas-title">2D PCA Embedding Projection · Semantic Vector Space</div>
+  <!-- ── CENTER: HIGH-TECH SCATTER PLOT ── -->
+  <div class="center-viewport">
+    <div class="viewport-banner">
+      <div class="viewport-badge">2D PCA Embedding Topology · Neural Semantic Coordinates</div>
     </div>
-    <div class="canvas-controls">
-      <button class="canvas-btn" onclick="resetScatterView()">Reset View</button>
+    <div class="viewport-tools">
+      <button class="tool-btn" onclick="resetScatterView()">Reset Viewport</button>
     </div>
     <canvas id="scatter"></canvas>
   </div>
 
-  <!-- ── RIGHT PANEL: TABS & RESULTS ── -->
-  <div class="right-panel">
+  <!-- ── RIGHT DOCK: TABS & RESULTS ── -->
+  <div class="right-dock">
     
-    <!-- Tab Navigation -->
-    <div class="tabs-nav">
-      <div class="tab-btn on" onclick="switchTab('search')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <!-- Tab Strip -->
+    <div class="tab-strip">
+      <div class="tab-trigger active" onclick="activateTab('search')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         SEARCH
       </div>
-      <div class="tab-btn" onclick="switchTab('docs')">
+      <div class="tab-trigger" onclick="activateTab('docs')">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         DOCUMENTS
       </div>
-      <div class="tab-btn" onclick="switchTab('rag')">
+      <div class="tab-trigger" onclick="activateTab('rag')">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
         ASK AI
       </div>
     </div>
 
     <!-- TAB 1: VECTOR SEARCH -->
-    <div class="tab-pane on" id="tab-search">
+    <div class="tab-chamber active" id="chamber-search">
       
-      <!-- Latency Hero -->
-      <div class="latency-hero">
-        <div class="sec-title" style="margin-bottom:4px">Retrieval Latency</div>
-        <div class="lat-num" id="latBig">—</div>
-        <div class="lat-sub" id="latSub">Execute a query to measure retrieval latency</div>
+      <!-- Speedometer Hero Card -->
+      <div class="speedometer-card">
+        <div class="dock-title" style="margin-bottom:4px;color:rgba(255,255,255,0.7)">Retrieval Speed</div>
+        <div class="lat-digits" id="latBig">—</div>
+        <div class="lat-meta" id="latSub">Execute a search to benchmark query latency</div>
       </div>
 
       <!-- Nearest Matches -->
-      <div class="panel-sec">
-        <div class="sec-title">Top Nearest Neighbors</div>
-        <div class="results-list" id="results">
-          <div style="color:var(--text-muted);font-size:11px">Execute a vector search to view ranked neighbors…</div>
+      <div class="dock-card">
+        <div class="dock-title">Nearest Neighbors</div>
+        <div class="results-stack" id="results">
+          <div style="color:var(--text-muted);font-size:11px">Execute a vector search to inspect ranked matches…</div>
         </div>
       </div>
 
-      <!-- 16D Vector Heatmap Visualizer -->
-      <div class="panel-sec">
-        <div class="sec-title">Query Vector Embeddings (16D)</div>
-        <canvas id="vecCvs" height="76" style="display:block;width:100%;background:rgba(9,11,20,0.7);border-radius:8px;border:1px solid var(--border-subtle);"></canvas>
+      <!-- 16D Vector Breakdown -->
+      <div class="dock-card">
+        <div class="dock-title">16D Embedding Barcode</div>
+        <canvas id="vecCvs" height="76" style="display:block;width:100%;background:rgba(6,8,16,0.8);border-radius:10px;border:1px solid var(--border-glass);"></canvas>
       </div>
 
-      <!-- Benchmark Section -->
-      <div class="panel-sec" id="benchSec" style="display:none">
-        <div class="sec-title">Algorithm Latency Race</div>
-        <div class="bench-box" id="benchBars"></div>
+      <!-- Benchmark Latency Race -->
+      <div class="dock-card" id="benchSec" style="display:none">
+        <div class="dock-title">Algorithm Latency Benchmark</div>
+        <div class="bench-grid" id="benchBars"></div>
       </div>
 
-      <!-- HNSW Graph Layers -->
-      <div class="panel-sec">
-        <div class="sec-title">HNSW Graph Hierarchy</div>
-        <div class="layers-box" id="layers">
+      <!-- HNSW Graph Hierarchy -->
+      <div class="dock-card">
+        <div class="dock-title">HNSW Graph Hierarchy</div>
+        <div class="hnsw-stack" id="layers">
           <div style="color:var(--text-muted);font-size:11px">Loading layer topology…</div>
         </div>
       </div>
@@ -1222,21 +1259,21 @@ input[type=range] {
     </div>
 
     <!-- TAB 2: DOCUMENTS -->
-    <div class="tab-pane" id="tab-docs">
+    <div class="tab-chamber" id="chamber-docs">
       
-      <!-- Ollama Status -->
-      <div class="panel-sec">
-        <div class="sec-title">Ollama Engine Status</div>
-        <div class="ollama-card" id="ollamaStatus">Checking neural inference service…</div>
+      <!-- Ollama Status Card -->
+      <div class="dock-card">
+        <div class="dock-title">Neural Engine Status</div>
+        <div class="ollama-card" id="ollamaStatus">Detecting Ollama inference runtime…</div>
       </div>
 
       <!-- Document Ingestion Form -->
-      <div class="panel-sec">
-        <div class="sec-title">Ingest Document Chunks</div>
-        <div class="input-wrap">
-          <input type="text" id="docTitle" placeholder="Document title / knowledge domain…" />
-          <textarea id="docText" placeholder="Paste knowledge base content, documentation, research papers, or notes…&#10;&#10;VectorMind automatically tokenizes and splits long text into semantic chunks and creates high-dimensional embeddings via Ollama."></textarea>
-          <button class="btn-g" id="insertDocBtn" onclick="insertDocument()">
+      <div class="dock-card">
+        <div class="dock-title">Ingest Knowledge Text</div>
+        <div class="input-group">
+          <input type="text" id="docTitle" placeholder="Document title / knowledge source…" />
+          <textarea id="docText" placeholder="Paste notes, textbook chapters, codebase summaries, or lecture transcripts…&#10;&#10;VectorMind tokenizes and partitions long text into semantic chunks and indexes them with Ollama's 768-dimensional model."></textarea>
+          <button class="btn-success" id="insertDocBtn" onclick="insertDocument()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
             EMBED &amp; INDEX DOCUMENT
           </button>
@@ -1245,108 +1282,108 @@ input[type=range] {
       </div>
 
       <!-- Stored Documents List -->
-      <div class="panel-sec">
-        <div class="sec-title">
-          <span>Indexed Documents</span>
-          <span style="font-family:'JetBrains Mono';color:var(--accent-light);" id="docCountLabel">0</span>
+      <div class="dock-card">
+        <div class="dock-title">
+          <span>Knowledge Documents</span>
+          <span style="font-family:'JetBrains Mono';color:var(--neon-cyan);" id="docCountLabel">0</span>
         </div>
-        <div class="doc-list" id="docList">
-          <div style="color:var(--text-muted);font-size:11px">No documents in the knowledge base yet.</div>
+        <div class="doc-rack" id="docList">
+          <div style="color:var(--text-muted);font-size:11px">Knowledge base empty. Ingest text above.</div>
         </div>
       </div>
 
     </div>
 
     <!-- TAB 3: ASK AI (RAG) -->
-    <div class="tab-pane" id="tab-rag">
+    <div class="tab-chamber" id="chamber-rag">
       
-      <!-- Ask Form -->
-      <div class="panel-sec">
-        <div class="sec-title">RAG Context-Aware Query</div>
-        <div class="input-wrap">
-          <textarea id="ragQuestion" rows="3" placeholder="Ask a question about your indexed knowledge…&#10;(e.g., 'What is dynamic programming?', 'How does HNSW graph work?')"></textarea>
+      <!-- Question Prompt Form -->
+      <div class="dock-card">
+        <div class="dock-title">Contextual Synthesis Query</div>
+        <div class="input-group">
+          <textarea id="ragQuestion" rows="3" placeholder="Ask questions based on your indexed knowledge base…&#10;(e.g., 'What is dynamic programming?', 'How does HNSW multilayer graph work?')"></textarea>
           <div style="display:flex;gap:8px">
             <select id="ragK" style="width:auto;flex-shrink:0">
               <option value="2">Top 2 Chunks</option>
               <option value="3" selected>Top 3 Chunks</option>
               <option value="5">Top 5 Chunks</option>
             </select>
-            <button class="btn-g" id="askBtn" onclick="askAI()" style="flex:1">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <button class="btn-success" id="askBtn" onclick="askAI()" style="flex:1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
               SYNTHESIZE ANSWER
             </button>
           </div>
           <div style="font-size:10px;color:var(--text-muted);line-height:1.4">
-            Vector retrieval extracts top context chunks via HNSW &amp; feeds them to your local LLM. Press <kbd style="font-family:'JetBrains Mono';background:rgba(255,255,255,0.06);padding:1px 4px;border-radius:3px">Ctrl+Enter</kbd> to ask.
+            Relevant chunks are retrieved via HNSW and fed to the local LLM. Press <kbd style="font-family:'JetBrains Mono';background:rgba(255,255,255,0.08);padding:2px 5px;border-radius:4px">Ctrl+Enter</kbd> to ask.
           </div>
         </div>
       </div>
 
       <!-- Conversation Thread -->
-      <div class="panel-sec" style="flex:1">
-        <div class="sec-title">Synthesized Dialogue</div>
-        <div class="chat-thread" id="chatHistory">
-          <div style="color:var(--text-muted);font-size:11px">Your conversation and retrieved sources will appear here…</div>
+      <div class="dock-card" style="flex:1">
+        <div class="dock-title">Synthesized Dialogue</div>
+        <div class="rag-timeline" id="chatHistory">
+          <div style="color:var(--text-muted);font-size:11px">Conversation output will appear here…</div>
         </div>
       </div>
 
     </div>
 
-  </div><!-- end right-panel -->
+  </div><!-- end right-dock -->
 
-</div><!-- end layout -->
+</div><!-- end workspace -->
 
 <!-- Floating Tooltip -->
 <div id="tip"></div>
 
 <script>
 // ════════════════════════════════════════════════════════════
-//  CONSTANTS & DESIGN TOKENS
+//  CONSTANTS & DESIGN SYSTEM
 // ════════════════════════════════════════════════════════════
 const API  = 'http://localhost:8080';
 const DIMS = 16;
 const COL  = {
-  cs:     '#06b6d4',
-  math:   '#a855f7',
-  food:   '#f59e0b',
-  sports: '#10b981',
+  cs:     '#00f0ff',
+  math:   '#c084fc',
+  food:   '#fbbf24',
+  sports: '#34d399',
   doc:    '#38bdf8',
   default:'#94a3b8'
 };
 const DIM_COL = [
-  '#06b6d4','#06b6d4','#06b6d4','#06b6d4',
-  '#a855f7','#a855f7','#a855f7','#a855f7',
-  '#f59e0b','#f59e0b','#f59e0b','#f59e0b',
-  '#10b981','#10b981','#10b981','#10b981'
+  '#00f0ff','#00f0ff','#00f0ff','#00f0ff',
+  '#c084fc','#c084fc','#c084fc','#c084fc',
+  '#fbbf24','#fbbf24','#fbbf24','#fbbf24',
+  '#34d399','#34d399','#34d399','#34d399'
 ];
 
 // ════════════════════════════════════════════════════════════
-//  APPLICATION STATE
+//  STATE
 // ════════════════════════════════════════════════════════════
 let allItems = [], pcaPoints = [], hitIds = new Set(), queryPt = null;
 let hoverItem = null, pulse = 0, selAlgo = 'hnsw', searchResults = [];
 
 // ════════════════════════════════════════════════════════════
-//  TABS CONTROLLER
+//  TAB CONTROLLER
 // ════════════════════════════════════════════════════════════
-function switchTab(name) {
-  document.querySelectorAll('.tab-btn').forEach((t, i) => {
+function activateTab(name) {
+  document.querySelectorAll('.tab-trigger').forEach((t, i) => {
     const names = ['search', 'docs', 'rag'];
-    t.classList.toggle('on', names[i] === name);
+    t.classList.toggle('active', names[i] === name);
   });
-  document.querySelectorAll('.tab-pane').forEach(c => c.classList.remove('on'));
-  const target = document.getElementById('tab-' + name);
-  if (target) target.classList.add('on');
+  document.querySelectorAll('.tab-chamber').forEach(c => c.classList.remove('active'));
+  const target = document.getElementById('chamber-' + name);
+  if (target) target.classList.add('active');
   if (name === 'docs') loadDocList();
 }
 
-function setQuery(text) {
+function applyQueryTag(text) {
   document.getElementById('qInput').value = text;
   runSearch();
 }
 
 // ════════════════════════════════════════════════════════════
-//  TEXT → 16-D EMBEDDING SIMULATOR (for demo vectors)
+//  TEXT TO 16D EMBEDDING SIMULATOR
 // ════════════════════════════════════════════════════════════
 const KW = {
   cs:     ['algorithm','data','tree','graph','array','linked','hash','stack','queue','sort','binary','dynamic','programming','recursion','complexity','pointer','node','search','insert','bfs','dfs','heap','trie'],
@@ -1438,7 +1475,7 @@ function resize() {
 window.addEventListener('resize', resize);
 
 function w2c(wx, wy) {
-  const W = sc.width / dpr, H = sc.height / dpr, P = 70;
+  const W = sc.width / dpr, H = sc.height / dpr, P = 75;
   const rx = bounds.maxX - bounds.minX || 1;
   const ry = bounds.maxY - bounds.minY || 1;
   return [
@@ -1465,40 +1502,40 @@ function drawFrame() {
   const W = sc.width / dpr, H = sc.height / dpr;
   ctx.clearRect(0, 0, W, H);
 
-  // Background radial grid
+  // Background gradient
   const bgGrd = ctx.createRadialGradient(W/2, H/2, 20, W/2, H/2, W * 0.7);
-  bgGrd.addColorStop(0, '#0c0f1e');
-  bgGrd.addColorStop(1, '#07080f');
+  bgGrd.addColorStop(0, '#0a0d1d');
+  bgGrd.addColorStop(1, '#030408');
   ctx.fillStyle = bgGrd;
   ctx.fillRect(0, 0, W, H);
 
-  // Grid lines
+  // Fine radar grid lines
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
   ctx.lineWidth = 1;
   for (let i = 0; i <= 8; i++) {
-    const tx = 70 + (i / 8) * (W - 140);
-    const ty = 70 + (i / 8) * (H - 140);
-    ctx.beginPath(); ctx.moveTo(tx, 70); ctx.lineTo(tx, H - 70); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(70, ty); ctx.lineTo(W - 70, ty); ctx.stroke();
+    const tx = 75 + (i / 8) * (W - 150);
+    const ty = 75 + (i / 8) * (H - 150);
+    ctx.beginPath(); ctx.moveTo(tx, 75); ctx.lineTo(tx, H - 75); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(75, ty); ctx.lineTo(W - 75, ty); ctx.stroke();
   }
 
-  // Axes coordinates
-  ctx.fillStyle = 'rgba(148, 163, 184, 0.3)';
-  ctx.font = '500 10px "JetBrains Mono", monospace';
-  ctx.fillText('Principal Component 1 (PC₁) →', W / 2 - 80, H - 24);
+  // Dimension axis markers
+  ctx.fillStyle = 'rgba(148, 163, 184, 0.35)';
+  ctx.font = '600 10px "JetBrains Mono", monospace';
+  ctx.fillText('Principal Component 1 (PC₁) →', W / 2 - 80, H - 25);
   ctx.save();
-  ctx.translate(26, H / 2 + 80);
+  ctx.translate(28, H / 2 + 80);
   ctx.rotate(-Math.PI / 2);
   ctx.fillText('Principal Component 2 (PC₂) →', 0, 0);
   ctx.restore();
 
-  // Draw query connector lines to nearest hits
+  // Draw connector lines to search hits
   if (queryPt && hitIds.size > 0) {
     const [qx, qy] = w2c(queryPt.x, queryPt.y);
     for (const pt of pcaPoints) {
       if (!hitIds.has(pt.item.id)) continue;
       const [px, py] = w2c(pt.x, pt.y);
-      ctx.strokeStyle = 'rgba(99, 102, 241, 0.3)';
+      ctx.strokeStyle = 'rgba(99, 102, 241, 0.35)';
       ctx.lineWidth = 1.5;
       ctx.setLineDash([5, 5]);
       ctx.beginPath();
@@ -1509,33 +1546,33 @@ function drawFrame() {
     }
   }
 
-  // Draw node points
+  // Draw vector nodes
   for (const pt of pcaPoints) {
     const [cx, cy] = w2c(pt.x, pt.y);
     const col = COL[pt.item.category] || COL.default;
     const isHit = hitIds.has(pt.item.id);
     const r = isHit ? 9 : 6.5;
 
-    // Glowing rings for search hits
+    // Glowing rings around hits
     if (isHit) {
-      const pr = r + 6 + Math.sin(pulse) * 3;
+      const pr = r + 7 + Math.sin(pulse) * 3.5;
       ctx.beginPath();
       ctx.arc(cx, cy, pr, 0, 2 * Math.PI);
-      ctx.strokeStyle = col + '77';
+      ctx.strokeStyle = col + '88';
       ctx.lineWidth = 1.5;
       ctx.stroke();
     }
 
-    // Radial node glow
-    const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 2.8);
-    grd.addColorStop(0, col + (isHit ? 'dd' : '99'));
+    // Outer node glow halo
+    const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 3);
+    grd.addColorStop(0, col + (isHit ? 'ff' : 'aa'));
     grd.addColorStop(1, 'transparent');
     ctx.beginPath();
-    ctx.arc(cx, cy, r * 2.8, 0, 2 * Math.PI);
+    ctx.arc(cx, cy, r * 3, 0, 2 * Math.PI);
     ctx.fillStyle = grd;
     ctx.fill();
 
-    // Node body
+    // Node Core
     ctx.beginPath();
     ctx.arc(cx, cy, r, 0, 2 * Math.PI);
     ctx.fillStyle = col;
@@ -1551,17 +1588,17 @@ function drawFrame() {
     }
   }
 
-  // Draw query star point
+  // Draw query star
   if (queryPt) {
     const [qx, qy] = w2c(queryPt.x, queryPt.y);
     ctx.save();
     ctx.translate(qx, qy);
-    ctx.shadowColor = '#ffffff';
-    ctx.shadowBlur = 18;
+    ctx.shadowColor = '#00f0ff';
+    ctx.shadowBlur = 20;
     ctx.beginPath();
     for (let i = 0; i < 10; i++) {
       const a = (i * Math.PI / 5) - Math.PI / 2;
-      const rr = i % 2 === 0 ? 12 : 5;
+      const rr = i % 2 === 0 ? 13 : 5;
       if (i === 0) ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr);
       else ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr);
     }
@@ -1571,16 +1608,16 @@ function drawFrame() {
     ctx.shadowBlur = 0;
     ctx.restore();
 
-    ctx.fillStyle = '#f8fafc';
-    ctx.font = '600 10px "Plus Jakarta Sans", sans-serif';
-    ctx.fillText('Query Vector', qx + 15, qy + 4);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '700 10px "Outfit", sans-serif';
+    ctx.fillText('Target Vector', qx + 16, qy + 4);
   }
 
   if (!pcaPoints.length) {
     ctx.fillStyle = 'rgba(148, 163, 184, 0.4)';
-    ctx.font = '600 13px "Plus Jakarta Sans", sans-serif';
+    ctx.font = '600 13px "Outfit", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Connecting to VectorMind Server…', W / 2, H / 2);
+    ctx.fillText('Connecting to VectorMind Engine…', W / 2, H / 2);
     ctx.textAlign = 'left';
   }
 
@@ -1611,10 +1648,10 @@ sc.addEventListener('mousemove', e => {
     tip.innerHTML = `
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
         <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${col}"></span>
-        <span style="font-weight:700;text-transform:uppercase;color:${col}">${hoverItem.category}</span>
-        <span style="color:var(--text-muted);margin-left:auto">#${hoverItem.id}</span>
+        <span style="font-weight:800;text-transform:uppercase;color:${col}">${hoverItem.category}</span>
+        <span style="color:var(--text-muted);margin-left:auto;font-family:'JetBrains Mono'">#${hoverItem.id}</span>
       </div>
-      <div style="color:var(--text-primary);font-weight:500">${hoverItem.metadata}</div>
+      <div style="color:#ffffff;font-weight:600">${hoverItem.metadata}</div>
     `;
   } else {
     tip.style.display = 'none';
@@ -1653,9 +1690,9 @@ async function loadItems() {
 // ════════════════════════════════════════════════════════════
 //  DEMO SEARCH
 // ════════════════════════════════════════════════════════════
-function setAlgo(el) {
-  document.querySelectorAll('.algo-card').forEach(b => b.classList.remove('on'));
-  el.classList.add('on');
+function selectAlgo(el) {
+  document.querySelectorAll('.algo-tile').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
   selAlgo = el.dataset.algo;
 }
 
@@ -1709,15 +1746,15 @@ function renderResults(results) {
   container.innerHTML = results.map((r, i) => {
     const col = COL[r.category] || COL.default;
     return `
-      <div class="rcard" onmouseenter="hoverItem={id:${r.id}}" onmouseleave="hoverItem=null">
-        <div class="rcard-top">
-          <span class="rrank">#${i + 1} NEAREST MATCH</span>
-          <span class="rcat" style="background:${col}18;color:${col};border:1px solid ${col}44">${r.category}</span>
+      <div class="match-card" onmouseenter="hoverItem={id:${r.id}}" onmouseleave="hoverItem=null">
+        <div class="card-header">
+          <span class="match-rank">#${i + 1} NEAREST MATCH</span>
+          <span class="match-cat-pill" style="background:${col}1c;color:${col};border:1px solid ${col}44">${r.category}</span>
         </div>
-        <div class="rmeta">${r.metadata}</div>
-        <div class="rfoot">
-          <span class="rdist">Distance: ${r.distance.toFixed(5)}</span>
-          <button class="del-btn" onclick="deleteItem(${r.id})" title="Delete vector node">✕</button>
+        <div class="match-label">${r.metadata}</div>
+        <div class="card-footer">
+          <span class="match-distance">Dist: ${r.distance.toFixed(5)}</span>
+          <button class="trash-btn" onclick="deleteItem(${r.id})" title="Delete vector node">✕</button>
         </div>
       </div>
     `;
@@ -1730,7 +1767,7 @@ function drawVecChart(emb) {
   vc.width = W;
   const vx = vc.getContext('2d');
   vx.clearRect(0, 0, W, 76);
-  vx.fillStyle = '#080a14';
+  vx.fillStyle = '#060810';
   vx.fillRect(0, 0, W, 76);
 
   const bw = (W - 8) / DIMS;
@@ -1740,11 +1777,11 @@ function drawVecChart(emb) {
     const col = DIM_COL[i];
     vx.shadowColor = col;
     vx.shadowBlur = 6;
-    vx.fillStyle = col + 'cc';
+    vx.fillStyle = col + 'dd';
     vx.fillRect(x + 1, 62 - h, bw - 2, h);
   }
   vx.shadowBlur = 0;
-  vx.font = '600 8px "JetBrains Mono", monospace';
+  vx.font = '700 8px "JetBrains Mono", monospace';
   vx.textAlign = 'center';
 
   [['CS', 0], ['MATH', 4], ['FOOD', 8], ['SPORT', 12]].forEach(([lbl, gi], i) => {
@@ -1765,19 +1802,19 @@ async function runBenchmark() {
     const mx = Math.max(d.bruteforceUs, d.kdtreeUs, d.hnswUs, 1);
     document.getElementById('benchBars').innerHTML = [
       { lbl: 'Brute Force (Exhaustive)', us: d.bruteforceUs, col: '#f43f5e' },
-      { lbl: 'KD-Tree (Spatial)',         us: d.kdtreeUs,    col: '#06b6d4' },
-      { lbl: 'HNSW Graph (Indexed)',      us: d.hnswUs,      col: '#a855f7' },
+      { lbl: 'KD-Tree (Spatial)',         us: d.kdtreeUs,    col: '#00f0ff' },
+      { lbl: 'HNSW Graph (Indexed)',      us: d.hnswUs,      col: '#c084fc' },
     ].map(({ lbl, us, col }) => {
       const pct = Math.max((us / mx) * 100, 3);
       const disp = us < 1000 ? `${us} μs` : `${(us / 1000).toFixed(2)} ms`;
       return `
-        <div class="bench-row">
-          <div class="bench-label">
+        <div class="bench-entry">
+          <div class="bench-header">
             <span style="color:${col}">${lbl}</span>
             <span style="font-family:'JetBrains Mono';color:var(--text-muted)">${disp}</span>
           </div>
-          <div class="bench-track">
-            <div class="bench-fill" style="width:${pct}%;background:${col}"></div>
+          <div class="bench-runway">
+            <div class="bench-bar" style="width:${pct}%;background:${col}"></div>
           </div>
         </div>
       `;
@@ -1794,12 +1831,12 @@ async function loadHNSW() {
       const pct = Math.max((cnt / maxN) * 100, 3);
       const edg = d.edgesPerLayer[lyr] || 0;
       return `
-        <div class="lrow">
-          <div class="lnum">L${lyr}</div>
-          <div class="ltrack">
-            <div class="lfill" style="width:${pct}%"></div>
+        <div class="hnsw-level">
+          <div class="level-id">L${lyr}</div>
+          <div class="level-channel">
+            <div class="level-meter" style="width:${pct}%"></div>
           </div>
-          <div class="lcount">${cnt} nodes · ${edg} edges</div>
+          <div class="level-count">${cnt} nodes · ${edg} edges</div>
         </div>
       `;
     }).join('') || '<div style="color:var(--text-muted);font-size:11px">Graph topology empty</div>';
@@ -1844,31 +1881,31 @@ async function checkOllamaStatus() {
     const badge = document.getElementById('ollamaBadge');
     const box = document.getElementById('ollamaStatus');
     if (d.ollamaAvailable) {
-      badge.className = 'badge ok';
-      badge.innerHTML = '<span class="pulse-dot"></span>OLLAMA ACTIVE';
-      box.className = 'ollama-card ok';
+      badge.className = 'pill-badge status-ok';
+      badge.innerHTML = '<span class="live-beacon"></span>OLLAMA ACTIVE';
+      box.className = 'ollama-card online';
       box.innerHTML = `
         <div style="display:flex;align-items:center;gap:6px;color:#34d399;font-weight:700;margin-bottom:6px">
-          <span class="pulse-dot"></span> Ollama Engine Connected
+          <span class="live-beacon"></span> Ollama Neural Runtime Connected
         </div>
         <div style="color:var(--text-secondary)">
-          Embedding Model: <strong style="color:var(--accent-light)">${d.embedModel}</strong><br>
-          Generation Model: <strong style="color:var(--accent-light)">${d.genModel}</strong><br>
+          Embedding Model: <strong style="color:var(--neon-indigo)">${d.embedModel}</strong><br>
+          Generation Model: <strong style="color:var(--neon-indigo)">${d.genModel}</strong><br>
           Vector Dimensions: <span style="font-family:'JetBrains Mono'">${d.docDims || '(Dynamic)'}</span><br>
-          Indexed Documents: <span style="font-family:'JetBrains Mono';color:#fff">${d.docCount}</span>
+          Indexed Documents: <span style="font-family:'JetBrains Mono';color:#ffffff">${d.docCount}</span>
         </div>
       `;
     } else {
-      badge.className = 'badge err';
+      badge.className = 'pill-badge status-err';
       badge.textContent = 'OLLAMA OFFLINE';
-      box.className = 'ollama-card err';
+      box.className = 'ollama-card offline';
       box.innerHTML = `
         <div style="color:#f43f5e;font-weight:700;margin-bottom:6px">● Ollama Service Offline</div>
         <div style="color:var(--text-muted);font-size:10px;line-height:1.6">
           To activate Document Embeddings &amp; RAG:<br>
-          1. Start Ollama: <code style="font-family:'JetBrains Mono';color:#fff">ollama serve</code><br>
-          2. Pull embedding model: <code style="font-family:'JetBrains Mono';color:#fff">ollama pull nomic-embed-text</code><br>
-          3. Pull generative model: <code style="font-family:'JetBrains Mono';color:#fff">ollama pull llama3.2</code>
+          1. Start Ollama: <code style="font-family:'JetBrains Mono';color:#ffffff">ollama serve</code><br>
+          2. Pull embedding model: <code style="font-family:'JetBrains Mono';color:#ffffff">ollama pull nomic-embed-text</code><br>
+          3. Pull generative model: <code style="font-family:'JetBrains Mono';color:#ffffff">ollama pull llama3.2</code>
         </div>
       `;
     }
@@ -1881,7 +1918,7 @@ async function insertDocument() {
   const btn = document.getElementById('insertDocBtn');
   const status = document.getElementById('insertStatus');
   if (!title || !text) {
-    status.innerHTML = '<span style="color:var(--danger)">⚠ Please specify both title and text content.</span>';
+    status.innerHTML = '<span style="color:#f43f5e">⚠ Please specify both title and text content.</span>';
     return;
   }
 
@@ -1897,13 +1934,12 @@ async function insertDocument() {
     });
     const d = await r.json();
     if (d.error) {
-      status.innerHTML = `<span style="color:var(--danger)">✗ ${d.error}</span>`;
+      status.innerHTML = `<span style="color:#f43f5e">✗ ${d.error}</span>`;
     } else {
-      status.innerHTML = `<span style="color:var(--success)">✓ Indexed ${d.chunks} chunk(s) (${d.dims}D)</span>`;
+      status.innerHTML = `<span style="color:#10b981">✓ Indexed ${d.chunks} chunk(s) (${d.dims}D)</span>`;
       document.getElementById('docTitle').value = '';
       document.getElementById('docText').value = '';
 
-      // Add a 16D projected node into demo space
       const emb16 = textToEmbedding(title + ' ' + text);
       fetch(API + '/insert', {
         method: 'POST',
@@ -1915,7 +1951,7 @@ async function insertDocument() {
       checkOllamaStatus();
     }
   } catch(_) {
-    status.innerHTML = '<span style="color:var(--danger)">✗ Backend request failure</span>';
+    status.innerHTML = '<span style="color:#f43f5e">✗ Backend request failure</span>';
   }
   btn.disabled = false;
   btn.textContent = 'EMBED & INDEX DOCUMENT';
@@ -1931,12 +1967,12 @@ async function loadDocList() {
       return;
     }
     document.getElementById('docList').innerHTML = docs.map(d => `
-      <div class="dcard">
-        <div class="dcard-title">${d.title}</div>
-        <div class="dcard-preview">${d.preview}</div>
-        <div class="dcard-foot">
-          <span class="dcard-words">${d.words} words</span>
-          <button class="del-btn" onclick="deleteDoc(${d.id})">✕ Delete</button>
+      <div class="doc-tile">
+        <div class="doc-title">${d.title}</div>
+        <div class="doc-snippet">${d.preview}</div>
+        <div class="doc-meta-row">
+          <span class="doc-stat">${d.words} words</span>
+          <button class="trash-btn" onclick="deleteDoc(${d.id})">✕ Delete</button>
         </div>
       </div>
     `).join('');
@@ -1952,7 +1988,7 @@ async function deleteDoc(id) {
 }
 
 // ════════════════════════════════════════════════════════════
-//  RAG PIPELINE (ASK AI)
+//  RAG CONTEXT SYNTHESIS (ASK AI)
 // ════════════════════════════════════════════════════════════
 document.getElementById('ragQuestion').addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.ctrlKey) askAI();
@@ -1969,20 +2005,17 @@ async function askAI() {
   const history = document.getElementById('chatHistory');
   history.innerHTML = '';
 
-  // Render question bubble
   const qDiv = document.createElement('div');
-  qDiv.className = 'chat-bubble-q';
+  qDiv.className = 'user-query-bubble';
   qDiv.textContent = question;
   history.appendChild(qDiv);
 
-  // Render thinking indicator
   const thinkDiv = document.createElement('div');
-  thinkDiv.className = 'thinking-loader';
-  thinkDiv.innerHTML = '<div class="spinner"></div><span>Retrieving context &amp; generating synthesis…</span>';
+  thinkDiv.className = 'pulse-spinner';
+  thinkDiv.innerHTML = '<div class="spin-ring"></div><span>Extracting context &amp; synthesizing answer…</span>';
   history.appendChild(thinkDiv);
   history.scrollTop = history.scrollHeight;
 
-  // Background visualizer sync
   fetch(API + '/doc/search', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -2015,36 +2048,35 @@ async function askAI() {
     thinkDiv.remove();
 
     const aDiv = document.createElement('div');
-    aDiv.className = 'chat-bubble-a';
+    aDiv.className = 'ai-response-box';
 
     if (d.error) {
-      aDiv.innerHTML = `<div class="chat-author" style="color:var(--danger)">ERROR</div><div class="chat-text" style="color:var(--danger)">${d.error}</div>`;
+      aDiv.innerHTML = `<div class="ai-badge" style="color:#f43f5e">ERROR</div><div class="ai-prose" style="color:#f43f5e">${d.error}</div>`;
       history.appendChild(aDiv);
     } else {
       aDiv.innerHTML = `
-        <div class="chat-author">
+        <div class="ai-badge">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4V4a2 2 0 0 1 2-2z"/></svg>
-          ${d.model || 'VectorMind AI Engine'}
+          ${d.model || 'VectorMind Neural Inference'}
         </div>
-        <div class="chat-text typing-cursor" id="typeTarget"></div>
-        <div class="chat-ctx-box">
-          <div class="chat-ctx-header">Context Sources (${d.contexts.length} chunks retrieved)</div>
+        <div class="ai-prose cursor-trail" id="typeTarget"></div>
+        <div class="retrieval-box">
+          <div class="retrieval-title">Source Citations (${d.contexts.length} chunks retrieved)</div>
           ${d.contexts.map((c, i) => `
-            <span class="ctx-chip" onclick="toggleCtx(${i})">#${i + 1} ${c.title} · dist: ${c.distance.toFixed(3)}</span>
-            <div class="ctx-expand" id="ctx-${i}">${c.text}</div>
+            <span class="source-pill" onclick="toggleDetails(${i})">#${i + 1} ${c.title} · dist: ${c.distance.toFixed(3)}</span>
+            <div class="source-details" id="ctx-${i}">${c.text}</div>
           `).join('')}
         </div>
       `;
       history.appendChild(aDiv);
 
-      // Typewriter effect
       const target = aDiv.querySelector('#typeTarget');
       const full = d.answer;
       let i = 0;
       const timer = setInterval(() => {
         if (i >= full.length) {
           clearInterval(timer);
-          target.classList.remove('typing-cursor');
+          target.classList.remove('cursor-trail');
           return;
         }
         target.textContent += full.slice(i, i + 3);
@@ -2055,8 +2087,8 @@ async function askAI() {
   } catch(e) {
     thinkDiv.remove();
     const err = document.createElement('div');
-    err.className = 'chat-bubble-a';
-    err.innerHTML = '<div class="chat-author" style="color:var(--danger)">ERROR</div><div class="chat-text" style="color:var(--danger)">Unable to connect to inference server.</div>';
+    err.className = 'ai-response-box';
+    err.innerHTML = '<div class="ai-badge" style="color:#f43f5e">ERROR</div><div class="ai-prose" style="color:#f43f5e">Unable to connect to inference server.</div>';
     history.appendChild(err);
   }
 
@@ -2066,13 +2098,13 @@ async function askAI() {
   history.scrollTop = history.scrollHeight;
 }
 
-function toggleCtx(i) {
+function toggleDetails(i) {
   const el = document.getElementById('ctx-' + i);
   if (el) el.style.display = el.style.display === 'block' ? 'none' : 'block';
 }
 
 // ════════════════════════════════════════════════════════════
-//  SYSTEM INITIALIZATION
+//  SYSTEM BOOT
 // ════════════════════════════════════════════════════════════
 resize();
 drawFrame();
